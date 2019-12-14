@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.demo.dao.SelAll">
+
+    <!--登录验证-->
+    <select id="selname5" resultType="com.great.demo.javabean.Userinf" parameterType="com.great.demo.javabean.Userinf">
+        select * from HOUTAI where  USERNAME=#{USERNAME} AND USERPSW=#{USERPSW}
+    </select>
+    <!--分页查询-->
+    <select id="selalluser" resultType="com.great.demo.javabean.FileUser" parameterType="com.great.demo.javabean.Yeshu" >
+       SELECT * FROM fileuser  where id LIKE "%"#{id}"%" ORDER BY id  LIMIT #{page},#{limit}
+    </select>
+    <select id="selalluser2" resultType="com.great.demo.javabean.Yeshu" parameterType="com.great.demo.javabean.Yeshu" >
+       SELECT * FROM outfileall where id LIKE "%"#{id}"%" ORDER BY id  LIMIT #{page},#{limit}
+    </select>
+    <!--查询用户列表总条数-->
+    <select id="selallnumber" resultType="int">
+       select COUNT(*) from fileuser
+    </select>
+    <!--查询文档列表总条数-->
+    <select id="selallnumber2" resultType="int">
+       select COUNT(*) from outfileall
+    </select>
+    <!--增加人员-->
+    <insert id="addusername" parameterType="com.great.demo.javabean.FileUser">
+        insert  into  FILEUSER(USERNAME,USERTYPE,ADDTIME)
+        values (#{USERNAME},'启用',#{ADDTIME})
+    </insert>
+    <!--删除一行数据-->
+    <delete id="delid" parameterType="java.lang.String" >
+DELETE FROM FILEUSER WHERE ID = #{ID}
+    </delete>
+    <!--删除权限-->
+    <delete id="delerole" parameterType="int" >
+DELETE FROM roletable2 WHERE USERID = #{USERID}
+    </delete>
+    <!--增加权限-->
+    <insert id="addmenu" parameterType="int">
+         insert  into  roletable2 (USERID,MENUID)
+    values (#{USERID},#{MENUID})
+    </insert>
+<!--查询权限-->
+    <select id="selallmenu" resultMap="epmap">
+        SELECt a.ROLENAME rol,A.PARENTID id1 ,b.ROLENAME rol1, b.PARENTID id2 FROM menutable as a,menutable as b WHERE a.parentid=b.chileid
+    </select>
+    <resultMap id="epmap" type="com.great.demo.javabean.MenuTable">
+        <result property="title" column="rol"></result>
+        <result property="id" column="id1"></result>
+        <collection property="children" ofType="com.great.demo.javabean.MenuTable">
+            <result property="title" column="rol1"></result>
+            <result property="id" column="id2"></result>
+        </collection>
+    </resultMap>
+<!--动态菜单-->
+    <select id="selmenu" resultMap="epmap1" parameterType="java.lang.String">
+        SELECT e.ROLENAME rol ,f.ROLENAME rol1,f.link
+        FROM menutable e,menutable f
+where e.PARENTID=f.CHILEID
+and e.PARENTID in
+(SELECT d.MENUID FROM roletable2 d where d.USERID=
+(
+SELECT c.MENUID from menuname c where c.MENUID=
+(SELECT b.NAMEID from roletable b WHERE b.JOBID=
+(SELECT a.userid from houtai a where a.USERNAME=#{ID}))))
+    </select>
+    <resultMap id="epmap1" type="com.great.demo.javabean.Menutable2">
+        <result property="parentname" column="rol"></result>
+        <result property="chindname" column="rol1"></result>
+        <result property="link" column="link"></result>
+    </resultMap>
+    <insert id="addfile" parameterType="java.lang.String">
+        insert into outfileall (ADDTIME,ADDNAME,FILENAME)
+       values (#{ADDTIOME},#{ADDNAME},#{FILENAME})
+    </insert>
+
+</mapper>
