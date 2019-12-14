@@ -58,7 +58,8 @@ public class controtel
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("jsp/userlist");
 		return modelAndView;
-	}444
+	}
+	//555
 	@RequestMapping(value = "Table.action")
 	@ResponseBody
 	public ALLDATA alldata(@RequestParam("limit") int limit, int page, String id ){
