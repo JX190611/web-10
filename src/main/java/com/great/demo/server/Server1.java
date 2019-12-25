@@ -118,4 +118,10 @@ public class Server1
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		return  selAll.addfile(date.format(formatter),ADDNAME,FILENAME);
 	}
+
+	public  List<Yeshu> selfasttime(){
+		return  selAll.selfasttime();
+	}
+	public  List<CardPort> selall(){return  selAll.selall();}
+
 }

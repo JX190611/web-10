@@ -24,6 +24,9 @@ public interface SelAll
 	public List<MenuTable> selallmenu();
 	public List<Menutable2> selmenu(String ID);
 	public  int addfile(@Param("ADDTIOME") String ADDTIOME,@Param("ADDNAME")  String ADDNAME,@Param("FILENAME")  String FILENAME);
+	public  List<Yeshu> selfasttime();
+	public List<CardPort> selall();
+
 }
 
 

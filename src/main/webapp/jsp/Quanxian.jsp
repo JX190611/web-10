@@ -87,7 +87,7 @@
 					url:"<%=path+"/addrole.action"%>",//提交的地址
 					data:"msg1="+shuju+"&msg2="+shuju2,//提交的数据
 					dataType:"text",//希望返回的数据类型*/
-					async: true,//异步操作
+					async: trualipaye,//异步操作
 					success:function (msg) {//成功的方法  msg为返回数据
 
 						layui.alert(msg);

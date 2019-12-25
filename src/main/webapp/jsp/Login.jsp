@@ -39,7 +39,6 @@
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
-
 		</div>
 	</div>
 </form>
@@ -61,7 +60,6 @@
 	layui.use(['layer', 'form'], function(){
 		var layer = layui.layer
 			,form = layui.form;
-
 		layer.msg('管理员后台登录');
 	});
 </script>

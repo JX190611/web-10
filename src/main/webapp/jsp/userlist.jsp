@@ -56,7 +56,6 @@
 	<button class="layui-btn" data-type="reload">搜索</button>
 	<button class="layui-btn" onclick="onAddBtn()">新增人员</button>
 </div>
-
 <table class="layui-hide" id="test" lay-filter="test"></table>
 <script type="text/html" id="toolbarDemo">
 	<div class="layui-btn-container">
@@ -230,7 +229,6 @@
 			}
 		}, 'json');
 	}
-
 	//关闭页面
 	function CloseWin(){
 		parent.location.reload(); // 父页面刷新

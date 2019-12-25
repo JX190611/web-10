@@ -75,4 +75,21 @@ SELECT c.MENUID from menuname c where c.MENUID=
        values (#{ADDTIOME},#{ADDNAME},#{FILENAME})
     </insert>
 
+    <select id="selfasttime" resultType="com.great.demo.javabean.Yeshu">
+        SELECT * from caretime c where c.CAREID<![CDATA[<= ]]>4
+</select>
+    <select id="selall" resultMap="epmap5">
+        SELECT * FROM tbl_carport a,tbl_state c where  c.stateid=a.stateid ORDER BY portid  LIMIT 0,10
+    </select>
+    <resultMap id="epmap5" type="com.great.demo.javabean.CardPort">
+        <result property="portid" column="portid"></result>
+        <result property="portcardid" column="portcardid"></result>
+        <result property="portarea" column="portarea"></result>
+        <result property="portname" column="portname"></result>
+        <result property="stateid" column="stateid"></result>
+        <result property="portx" column="portx"></result>
+        <result property="porty" column="porty"></result>
+        <result property="carnum" column="carnum"></result>
+        <result property="statename" column="statename"></result>
+    </resultMap>
 </mapper>
